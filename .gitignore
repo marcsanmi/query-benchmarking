@@ -1,0 +1,11 @@
+bin/
+.env
+real-dataset.sz
+.test_coverage.txt
+
+# IDE
+.idea/
+.idea
+
+# OS generated files
+.DS_Store
