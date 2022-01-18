@@ -14,7 +14,7 @@ docker rm -f "${DOCKER_TIMESCALEDB_CONTAINER_NAME}" || true
 docker network create --driver bridge "${DOCKER_NETWORK}" || true
 
 # Run TimescaleDB with Promscale extension
-docker run --name "${DOCKER_TIMESCALEDB_CONTAINER_NAME}" \
+docker run --name "${DOCKER_TIMESCALEDB_CONTAINER_NAME}" -d \
     -e POSTGRES_PASSWORD="${POSTGRES_PASSWORD}" \
     -e POSTGRES_USER="${POSTGRES_USER}" \
     -p "${TIMESCALEDB_HOST_PORT}:${TIMESCALEDB_CONTAINER_PORT}" \

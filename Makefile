@@ -1,8 +1,14 @@
-.PHONY: check run-promscale run-timescaledb stop-promscale stop-timescaledb test help
+.PHONY: check compile run run-promscale run-timescaledb stop-promscale stop-timescaledb test help
 
 check: ## Run checks
 	bash scripts/lint.sh
 	bash scripts/tidy.sh
+
+compile: ## Build service binary
+	bash scripts/compile.sh ${ostype}
+
+run: compile ## Run locally
+	bin/query-benchmarking $(if $(workers),--workers=$(workers),) $(if $(timeout),--timeout=$(timeout),)
 
 run-promscale: ## Run Promscale container
 	@export $$(cat .env | grep -v "#" | xargs) && \
@@ -13,7 +19,7 @@ run-timescaledb: ## Install and run TimescaleDB with Promscale extension
 	bash scripts/timescaledb/run.sh
 
 stop-promscale: ## Stop Promscale container
-	@export $$(cat .env | grep -v "#" | xargs) && \
+	@export $$(cat .enqv | grep -v "#" | xargs) && \
 	bash scripts/promscale/stop.sh
 
 stop-timescaledb: ## Stop timescaledb container

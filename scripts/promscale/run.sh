@@ -8,7 +8,7 @@ command -v docker > /dev/null 2>&1 || { echo 'please install docker or use image
 docker rm -f "${DOCKER_PROMSCALE_CONTAINER_NAME}" || true
 
 # Run Promscale
-docker run --name "${DOCKER_PROMSCALE_CONTAINER_NAME}" \
+docker run --name "${DOCKER_PROMSCALE_CONTAINER_NAME}" -d \
     -p "${PROMSCALE_HOST_PORT}:${PROMSCALE_CONTAINER_PORT}" \
     --network "${DOCKER_NETWORK}" \
     "${DOCKER_PROMSCALE_IMAGE}" \
